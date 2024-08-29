@@ -1,0 +1,124 @@
+mysql> create database StudentManagementSystem;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| ecommerce               |
+| information_schema      |
+| mysql                   |
+| performance_schema      |
+| sakila                  |
+| studentmanagementsystem |
+| sys                     |
+| world                   |
++-------------------------+
+8 rows in set (0.04 sec)
+
+mysql> use StudentManagementSystem;
+Database changed
+mysql> create table Student (StudentID int(11) NOT NULL primary key auto_increment,FirstName varchar(10) NOT NULL,LastName varchar(10) NOT NULL, DateOfBirth DATE NOT NULL,Gender VARCHAR(50) NOT NULL UNIQUE,Email VARCHAR(100) NOT NULL UNIQUE,Phone VARCHAR(15) NOT NULL);
+Query OK, 0 rows affected, 1 warning (0.05 sec)
+
+mysql> create table Course (CourseID int(11) NOT NULL primary key auto_increment,CourseTitle varchar(30) NOT NULL,Credits INT NOT NULL);
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> create table Instructor ( InstructorID int(11) NOT NULL primary key auto_increment,FirstName varchar(10) NOT NULL,LastName varchar(10) NOT NULL,Email
+ VARCHAR(100) NOT NULL UNIQUE);
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> create table Enrollment ( EnrollmentID int(11) NOT NULL primary key auto_increment,EnrollmentDate DATE NOT NULL,StudentID INT NOT NULL,CourseID INT NOT NULL,InstructorID INT NOT NULL, FOREIGN KEY (StudentID) REFERENCES Student(StudentID),FOREIGN KEY (CourseID) REFERENCES Course(CourseID),FOREIGN KEY (InstructorID) REFERENCES Instructor(InstructorID));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> create table Score ( ScoreID int(11) NOT NULL primary key auto_increment,CourseID INT NOT NULL,StudentID INT NOT NULL,DateOfExam DATE NOT NULL,CreditObtained INT NOT NULL,FOREIGN KEY (CourseID) REFERENCES Course(CourseID), FOREIGN KEY (StudentID) REFERENCES Student(StudentID));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> CREATE TABLE Feedback (FeedbackID INT PRIMARY KEY AUTO_INCREMENT,StudentID INT NOT NULL,Date DATE NOT NULL,InstructorName VARCHAR(100) NOT NULL,Feedback TEXT NOT NULL,FOREIGN KEY (StudentID) REFERENCES Student(StudentID));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> SHOW TABLES;
++-----------------------------------+
+| Tables_in_studentmanagementsystem |
++-----------------------------------+
+| course                            |
+| enrollment                        |
+| feedback                          |
+| instructor                        |
+| score                             |
+| student                           |
++-----------------------------------+
+6 rows in set (0.01 sec)
+
+mysql> desc course;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| CourseID    | int         | NO   | PRI | NULL    | auto_increment |
+| CourseTitle | varchar(30) | NO   |     | NULL    |                |
+| Credits     | int         | NO   |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> desc student;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| StudentID   | int          | NO   | PRI | NULL    | auto_increment |
+| FirstName   | varchar(10)  | NO   |     | NULL    |                |
+| LastName    | varchar(10)  | NO   |     | NULL    |                |
+| DateOfBirth | date         | NO   |     | NULL    |                |
+| Gender      | varchar(50)  | NO   | UNI | NULL    |                |
+| Email       | varchar(100) | NO   | UNI | NULL    |                |
+| Phone       | varchar(15)  | NO   |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> desc instructor;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| InstructorID | int          | NO   | PRI | NULL    | auto_increment |
+| FirstName    | varchar(10)  | NO   |     | NULL    |                |
+| LastName     | varchar(10)  | NO   |     | NULL    |                |
+| Email        | varchar(100) | NO   | UNI | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> desc enrollment;
++----------------+------+------+-----+---------+----------------+
+| Field          | Type | Null | Key | Default | Extra          |
++----------------+------+------+-----+---------+----------------+
+| EnrollmentID   | int  | NO   | PRI | NULL    | auto_increment |
+| EnrollmentDate | date | NO   |     | NULL    |                |
+| StudentID      | int  | NO   | MUL | NULL    |                |
+| CourseID       | int  | NO   | MUL | NULL    |                |
+| InstructorID   | int  | NO   | MUL | NULL    |                |
++----------------+------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> desc score;
++----------------+------+------+-----+---------+----------------+
+| Field          | Type | Null | Key | Default | Extra          |
++----------------+------+------+-----+---------+----------------+
+| ScoreID        | int  | NO   | PRI | NULL    | auto_increment |
+| CourseID       | int  | NO   | MUL | NULL    |                |
+| StudentID      | int  | NO   | MUL | NULL    |                |
+| DateOfExam     | date | NO   |     | NULL    |                |
+| CreditObtained | int  | NO   |     | NULL    |                |
++----------------+------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> desc feedback;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| FeedbackID     | int          | NO   | PRI | NULL    | auto_increment |
+| StudentID      | int          | NO   | MUL | NULL    |                |
+| Date           | date         | NO   |     | NULL    |                |
+| InstructorName | varchar(100) | NO   |     | NULL    |                |
+| Feedback       | text         | NO   |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec
+
+
