@@ -1,0 +1,86 @@
+mysql> CREATE DATABASE company;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| company                 |
+| ecommerce               |
+| information_schema      |
+| mysql                   |
+| performance_schema      |
+| sakila                  |
+| studentmanagementsystem |
+| sys                     |
+| world                   |
++-------------------------+
+9 rows in set (0.01 sec)
+
+mysql> use company;
+Database changed
+mysql> CREATE TABLE Employee (emp_id INT PRIMARY KEY,first_name VARCHAR(50),last_name VARCHAR(50),age INT,email VARCHAR(50));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| employee          |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO Employee (emp_id, first_name, last_name, age, email)VALUES (1,'sachin', 'Doe', 28, 'sachin.doe@example.com'),(2, 'nikita', 'Smith', 34, 'nikita.smith@example.com'),(3, 'sneha', 'Johnson', 25, 'sneha.johnson@example.com'),(4, 'sai', 'Smith',34, 'sai.smith@example.com'),(5, 'nimita', 'Johnson', 25, 'nimita.johnson@example.com');
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc Employee
+    -> ;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| emp_id     | int         | NO   | PRI | NULL    |       |
+| first_name | varchar(50) | YES  |     | NULL    |       |
+| last_name  | varchar(50) | YES  |     | NULL    |       |
+| age        | int         | YES  |     | NULL    |       |
+| email      | varchar(50) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> SELECT first_name, last_name FROM Employee;
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| sachin     | Doe       |
+| nikita     | Smith     |
+| sneha      | Johnson   |
+| sai        | Smith     |
+| nimita     | Johnson   |
++------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT first_name, last_name, age FROM Employee WHERE age > 30;
++------------+-----------+------+
+| first_name | last_name | age  |
++------------+-----------+------+
+| nikita     | Smith     |   34 |
+| sai        | Smith     |   34 |
++------------+-----------+------+
+2 rows in set (0.01 sec)
+
+mysql> UPDATE Employee SET age = age + 1 WHERE age > 25;
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from Employee;
++--------+------------+-----------+------+----------------------------+
+| emp_id | first_name | last_name | age  | email                      |
++--------+------------+-----------+------+----------------------------+
+|      1 | sachin     | Doe       |   29 | sachin.doe@example.com     |
+|      2 | nikita     | Smith     |   35 | nikita.smith@example.com   |
+|      3 | sneha      | Johnson   |   25 | sneha.johnson@example.com  |
+|      4 | sai        | Smith     |   35 | sai.smith@example.com      |
+|      5 | nimita     | Johnson   |   25 | nimita.johnson@example.com |
++--------+------------+-----------+------+------------------
+5 rows in set (0.01 sec)
+
